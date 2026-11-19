@@ -254,8 +254,11 @@ img,svg,video{max-width:100%}
 /* Phone layout, including the 390px target width. */
 @media (max-width:560px){
 .wrap{padding-inline:16px}
-h1{font-size:clamp(3.1rem,15vw,4.3rem)}
-.tags{font-size:1rem;gap:2px}
+/* Keep the introduction near the navigation instead of stretching the empty space to fill the screen. */
+.hero{min-height:0;justify-content:flex-start;gap:clamp(48px,10vh,80px);padding:18px 0 32px}
+.hero h1{font-size:clamp(3.1rem,15vw,4.3rem)}
+.hero .tags{font-size:clamp(.8rem,3.5vw,1rem);gap:2px;max-width:none}
+.hero .avail{font-size:clamp(.7rem,3vw,.85rem);gap:8px;padding-inline:12px}
 .cta-row{flex-direction:column;align-items:stretch}
 .cta-row .btn{width:100%;justify-content:center}
 .logo{font-size:1.35rem}
@@ -263,6 +266,9 @@ h1{font-size:clamp(3.1rem,15vw,4.3rem)}
 .ovt button{font-size:.85rem;padding:9px 12px}
 .pfeat{font-size:.68rem}
 .cb h2{line-height:1.4}
+}
+@media (min-width:390px) and (max-width:560px){
+.hero .tags li,.hero .avail span{white-space:nowrap}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}h1 b{transform:none}#pre{display:none}}
 @media print{body{background:#fff;color:#111;line-height:1.7;overflow:visible}.grain,.cur,#pre,.hero,.stmt .rings,.rings,.rg,.ov,.ovt,.btn,.cbtn{display:none!important}h1,h2,h3,h4,.m,.ck,.sig b,.lat{color:#111!important}.stmt p span{opacity:1!important}.stage,.pj,.row,.sg{break-inside:avoid}a[href^="http"]:after{content:" (" attr(href) ")";font-size:.8em;color:#444}}
