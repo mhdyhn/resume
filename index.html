@@ -303,7 +303,7 @@ function mock(p){
   :'<div class="scr"><em class="hd" style="height:100%"></em><div style="display:grid;gap:8px;align-content:start"><em class="sm" style="width:35%"></em><em></em><em class="ch" style="height:90px"><u style="height:50%"></u><u style="height:80%"></u><u style="height:60%"></u><u style="height:95%"></u><u style="height:70%"></u><u style="height:85%"></u></em><em></em></div></div>';
  return m?`<div class="mk">${inner}</div>`:`<div class="mk d"><div class="bar"><i></i><i></i><i></i></div>${inner}</div>`;
 }
-$('#archm').innerHTML=mock({...projects[0],dev:'m'});
+{const hp=projects[0];$('#archm').innerHTML=(hp.img&&hp.dev==='d')?`<img src="${hp.img}" alt="" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block">`:mock({...hp,dev:'m'});}
 
 /* projects */
 const box=$('#pjs');
