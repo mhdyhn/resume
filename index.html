@@ -115,8 +115,9 @@ h1 span:nth-child(1){text-align:start}
 .pj .info{grid-column:8/13}
 .pj:nth-child(even) .stage{grid-column:6/13;grid-row:1}
 .pj:nth-child(even) .info{grid-column:1/6}
-.stage{position:relative;aspect-ratio:5/4.4;border-radius:999px 999px 20px 20px;overflow:hidden;background:linear-gradient(160deg,var(--g2),var(--g0));clip-path:inset(100% 0 0 0);transition:clip-path 1.6s cubic-bezier(.16,.8,.2,1);display:grid;place-items:center;perspective:900px}
-.stage.in{clip-path:inset(0)}
+.stage{position:relative;aspect-ratio:5/4.4;border-radius:999px 999px 20px 20px;overflow:hidden;background:linear-gradient(160deg,var(--g2),var(--g0));transition:clip-path 1.6s cubic-bezier(.16,.8,.2,1);display:grid;place-items:center;perspective:900px}
+.stage.js{clip-path:inset(100% 0 0 0)}
+.stage.js.in{clip-path:inset(0)}
 .stage::before{content:"";position:absolute;width:70%;aspect-ratio:1;border-radius:50%;background:var(--g3);filter:blur(70px);opacity:.5}
 .tilt{position:relative;transition:transform .5s cubic-bezier(.2,.8,.2,1);transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
 .info h3{margin:0 0 6px;font-weight:200;font-size:clamp(2rem,4.4vw,3.8rem);line-height:1.35}
@@ -189,7 +190,7 @@ h1 span:nth-child(1){text-align:start}
 .ul,.btn,.cbtn,.ovt button,.chips span{touch-action:manipulation}
 img,svg,video{max-width:100%}
 @media (max-width:820px){.pj .stage,.pj:nth-child(even) .stage{grid-column:1/-1;grid-row:1}.pj .info,.pj:nth-child(even) .info{grid-column:1/-1}.row,.ovb{grid-template-columns:1fr}.ovb .stage{position:relative;top:0}.gal{max-height:none}.hbody,.skx{grid-template-columns:1fr}.skl{position:static}.arch{max-width:230px}.nav ul li:nth-child(n+3){display:none}.nav a{padding:12px 2px}.silk{filter:blur(42px);opacity:.38;animation:none}.ovt button{min-height:48px;padding:10px 22px;font-size:1rem}}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}.stage{clip-path:none}h1 b{transform:none}#pre{display:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}.stage,.stage.js{clip-path:none}h1 b{transform:none}#pre{display:none}}
 @media print{body{background:#fff;color:#111;line-height:1.7;overflow:visible}.grain,.cur,#pre,.hero,.stmt .rings,.rings,.rg,.ov,.ovt,.btn,.cbtn{display:none!important}h1,h2,h3,h4,.m,.ck,.sig b,.lat{color:#111!important}.stmt p span{opacity:1!important}.stage,.pj,.row,.sg{break-inside:avoid}a[href^="http"]:after{content:" (" attr(href) ")";font-size:.8em;color:#444}}
 </style>
 </head>
@@ -303,7 +304,7 @@ function mock(p){
   :'<div class="scr"><em class="hd" style="height:100%"></em><div style="display:grid;gap:8px;align-content:start"><em class="sm" style="width:35%"></em><em></em><em class="ch" style="height:90px"><u style="height:50%"></u><u style="height:80%"></u><u style="height:60%"></u><u style="height:95%"></u><u style="height:70%"></u><u style="height:85%"></u></em><em></em></div></div>';
  return m?`<div class="mk">${inner}</div>`:`<div class="mk d"><div class="bar"><i></i><i></i><i></i></div>${inner}</div>`;
 }
-{const hp=projects[0];$('#archm').innerHTML=(hp.img&&hp.dev==='d')?`<img src="${hp.img}" alt="" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block">`:mock({...hp,dev:'m'});}
+{const hp=projects[0];$('#archm').innerHTML=(hp.img&&hp.dev==='d')?`<img fetchpriority="high" src="${hp.img}" alt="" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block">`:mock({...hp,dev:'m'});}
 
 /* projects */
 const box=$('#pjs');
@@ -324,9 +325,9 @@ if(H)$$('.stage').forEach(s=>{const t=s.querySelector('.tilt');
 const st=$('#stmt');st.innerHTML=st.textContent.split(' ').map(w=>`<span>${w}</span>`).join(' ');
 const words=$$('#stmt span');
 
-/* scroll: parallax, words, reveal */
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.2});
-$$('.stage').forEach(s=>io.observe(s));
+/* scroll: parallax, words, reveal — مقاوم در برابر مرورگرهای بدون IntersectionObserver و خطاهای بالا */
+let io=null;try{io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15})}catch(e){io=null}
+$$('.stage').forEach(s=>{if(!io)return;s.classList.add('js');io.observe(s)});
 let tick=false;
 function sc(){tick=false;const vh=innerHeight;
  $$('[data-p]').forEach(el=>{const r=el.getBoundingClientRect();el.style.translate='0 '+((r.top+r.height/2-vh/2)*parseFloat(el.dataset.p)).toFixed(1)+'px'});
