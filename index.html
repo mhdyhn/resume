@@ -254,7 +254,9 @@ img,svg,video{max-width:100%}
 /* Phone layout, including the 390px target width. */
 @media (max-width:560px){
 .wrap{padding-inline:16px}
-h1{font-size:clamp(3.1rem,15vw,4.3rem)}
+/* Keep the introduction near the navigation instead of stretching the empty space to fill the screen. */
+.hero{min-height:0;justify-content:flex-start;gap:clamp(48px,10vh,80px);padding:18px 0 32px}
+.hero h1{font-size:clamp(3.1rem,15vw,4.3rem)}
 .tags{font-size:1rem;gap:2px}
 .cta-row{flex-direction:column;align-items:stretch}
 .cta-row .btn{width:100%;justify-content:center}
