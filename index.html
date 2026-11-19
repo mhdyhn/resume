@@ -258,7 +258,7 @@ const projects=[
   process:'طراحی سیستم یکدست صفحه‌ها: صفحهٔ اصلی با هیرو و آمارها، صفحهٔ خدمات، پورتفولیو و صفحات «هوشمند» برای هر خدمت (طراحی سایت، طراحی اپ، سئو سایت، سئو داخلی، سئو خارجی، سئو تکنیکال، بهینه‌سازی سرعت، ریدیزاین، نگه‌داری و پشتیبانی)؛ با بلاک‌های مشترکِ نوار دعوت‌به‌اقدام، کارت‌های پلن قیمت‌گذاری، نظرات مشتریان و سؤالات متداول.',
   dec:'هویت بصری نارنجی و سرمه‌ای با تصویرسازی فضانورد و موشک در کل صفحات؛ ساختار و ریتم یکسانِ سکشن‌ها در صفحات خدمات تا کاربر همیشه جای خودش در مسیر را بداند؛ تأکید بر تبدیل بازدیدکننده به تماس (نوار دعوت‌به‌اقدام و شماره تماس).',
   res:'مجموعهٔ کامل و یکپارچهٔ صفحات طراحی‌شدهٔ گروه رابین — از صفحهٔ اصلی تا جزئی‌ترین صفحهٔ خدمات — آمادهٔ توسعهٔ تک‌جا.',
-  img:'assets/projects/robin/robin-home.webp',
+  img:'assets/projects/robin/robin-desktop.webp',
   gallery:[
    ['robin-home','صفحهٔ اصلی'],['robin-services','صفحهٔ خدمات'],['robin-portfolio','پورتفولیو'],
    ['robin-design-dev','طراحی و توسعهٔ هوشمند'],['robin-site-design','طراحی سایت هوشمند'],['robin-app-design','طراحی اپ هوشمند'],
@@ -305,7 +305,7 @@ function mock(p){
  const inner=p.img?`<div class="scr im"><img src="${p.img}" alt="${p.t}" onerror="this.closest('.scr').outerHTML=ph(${m?1:0})"></div>`:ph(m);
  return m?`<div class="mk">${inner}</div>`:`<div class="mk d"><div class="bar"><i></i><i></i><i></i></div>${inner}</div>`;
 }
-{const hp=projects[0];$('#archm').innerHTML=(hp.img&&hp.dev==='d')?`<img fetchpriority="high" src="${hp.img}" alt="" onerror="this.outerHTML=mock({...projects[0],dev:'m'})" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block">`:mock({...hp,dev:'m'});}
+{const hp=projects[0];$('#archm').innerHTML=(hp.img&&hp.dev==='d')?`<img fetchpriority="high" src="${hp.img}" alt="" onerror="this.outerHTML=mock({...projects[0],dev:'m'})" style="width:100%;height:100%;object-fit:cover;object-position:32% 42%;display:block">`:mock({...hp,dev:'m'});}
 
 /* projects */
 const box=$('#pjs');
