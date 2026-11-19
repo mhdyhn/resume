@@ -135,7 +135,11 @@ h1 span:nth-child(1){text-align:start}
 .scr em{display:block;border-radius:10px;background:rgba(255,255,255,.6);height:30px}
 .scr .hd{height:78px;background:var(--g1)}.scr .sm{height:10px;width:55%;background:rgba(10,46,42,.35)}
 .scr .ch{display:flex;gap:6px;align-items:end;height:60px;background:none}.scr .ch u{flex:1;background:var(--g2);border-radius:4px 4px 0 0}
-.scr img{width:100%;height:100%;object-fit:cover;border-radius:inherit}.scr.im{padding:0}
+.scr img{width:100%;height:100%;object-fit:cover;border-radius:inherit;object-position:top center}.scr.im{padding:0}
+.gal{display:grid;gap:18px;max-height:82vh;overflow:auto;overscroll-behavior:contain;padding-inline-end:8px;scrollbar-width:thin}
+.gal figure{margin:0;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--g1)}
+.gal img{display:block;width:100%;height:auto;border-radius:0}
+.gal figcaption{color:var(--mut);font-size:.85rem;padding:10px 14px;border-top:1px solid var(--line)}
 
 /* skills / resume / contact */
 .skx{display:grid;grid-template-columns:1fr 1.6fr;gap:clamp(30px,6vw,100px);padding-block:clamp(70px,10vw,150px);border-block:1px solid var(--line)}
@@ -184,7 +188,7 @@ h1 span:nth-child(1){text-align:start}
 .ov{overscroll-behavior:contain}
 .ul,.btn,.cbtn,.ovt button,.chips span{touch-action:manipulation}
 img,svg,video{max-width:100%}
-@media (max-width:820px){.pj .stage,.pj:nth-child(even) .stage{grid-column:1/-1;grid-row:1}.pj .info,.pj:nth-child(even) .info{grid-column:1/-1}.row,.ovb{grid-template-columns:1fr}.ovb .stage{position:relative;top:0}.hbody,.skx{grid-template-columns:1fr}.skl{position:static}.arch{max-width:230px}.nav ul li:nth-child(n+3){display:none}.nav a{padding:12px 2px}.silk{filter:blur(42px);opacity:.38;animation:none}.ovt button{min-height:48px;padding:10px 22px;font-size:1rem}}
+@media (max-width:820px){.pj .stage,.pj:nth-child(even) .stage{grid-column:1/-1;grid-row:1}.pj .info,.pj:nth-child(even) .info{grid-column:1/-1}.row,.ovb{grid-template-columns:1fr}.ovb .stage{position:relative;top:0}.gal{max-height:none}.hbody,.skx{grid-template-columns:1fr}.skl{position:static}.arch{max-width:230px}.nav ul li:nth-child(n+3){display:none}.nav a{padding:12px 2px}.silk{filter:blur(42px);opacity:.38;animation:none}.ovt button{min-height:48px;padding:10px 22px;font-size:1rem}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}.stage{clip-path:none}h1 b{transform:none}#pre{display:none}}
 @media print{body{background:#fff;color:#111;line-height:1.7;overflow:visible}.grain,.cur,#pre,.hero,.stmt .rings,.rings,.rg,.ov,.ovt,.btn,.cbtn{display:none!important}h1,h2,h3,h4,.m,.ck,.sig b,.lat{color:#111!important}.stmt p span{opacity:1!important}.stage,.pj,.row,.sg{break-inside:avoid}a[href^="http"]:after{content:" (" attr(href) ")";font-size:.8em;color:#444}}
 </style>
@@ -248,17 +252,30 @@ img,svg,video{max-width:100%}
 const TG='Mhdy_Hn12';
 const LOGO='assets/logo-mark.png'; /* مسیر فایل لوگو، مثلاً assets/logo.svg */
 const projects=[
- {t:'Robin Ghrop',ty:'',y:'',dev:'m',sum:'طراحی رابط و تجربهٔ کاربری برای Robin Ghrop.'},
- {t:'میتی',ty:'وب‌اپ',y:'',dev:'d',sum:'طراحی و اجرای محصول میتی (meetycoach.ir)؛ از ایده تا رابط نهایی و اجرای زنده روی دامنه.',link:'https://meetycoach.ir',linkLabel:'مشاهدهٔ محصول زنده'},
- {t:'Fartak Project',ty:'',y:'',dev:'d',sum:'پروژهٔ طراحی Fartak Project.'},
- {t:'بالنو | پروژه سایت رنگ فروشی',ty:'وب‌سایت',y:'',dev:'d',sum:'طراحی سایت فروشگاه رنگ بالنو؛ از معماری صفحات تا کامپوننت‌های فروشگاهی.'},
- {t:'علار',ty:'',y:'',dev:'m',sum:'پروژهٔ طراحی علار.'},
- {t:'مبلمان اداری',ty:'',y:'',dev:'d',sum:'طراحی تجربهٔ مبلمان اداری؛ از معماری اطلاعات تا طراحی صفحه.'},
- {t:'بدون اسم',ty:'',y:'',dev:'m',sum:'پروژهٔ بدون‌نام.'},
- {t:'بدون اسم',ty:'',y:'',dev:'d',sum:'پروژهٔ بدون‌نام.'},
- {t:'بدون اسم',ty:'',y:'',dev:'m',sum:'پروژهٔ بدون‌نام.'},
- {t:'بدون اسم',ty:'',y:'',dev:'d',sum:'پروژهٔ بدون‌نام.'},
- {t:'New Project 1',ty:'',y:'',dev:'m',sum:'پروژهٔ جدید.'}
+ {t:'رابین',ty:'وب‌سایت',dev:'d',meta:'منتخب · طراحی رابط و تجربهٔ کاربری',featured:1,
+  sum:'اندیشهٔ نوین کسب‌وکارها؛ گروه رابین (Robin Group) کسب‌وکارهای خرد و کلان را به استارتاپ تبدیل می‌کند — از طراحی سایت و اپلیکیشن تا سئو، بهینه‌سازی سرعت و پشتیبانی.',
+  role:'طراحی رابط و تجربهٔ کاربری',
+  problem:'گروه رابین مجموعهٔ گسترده‌ای از خدمات دارد — طراحی و توسعهٔ سایت، طراحی اپ، سئو (داخلی، خارجی، تکنیکال)، بهینه‌سازی سرعت، ریدیزاین و نگه‌داری و پشتیبانی. صفحات اصلی، خدمات و هر خدمت تخصصی باید در یک وب‌سایت یکپارچه هویت واحد برند را نگه می‌داشت.',
+  process:'طراحی سیستم یکدست صفحه‌ها: صفحهٔ اصلی با هیرو و آمارها، صفحهٔ خدمات، پورتفولیو و صفحات «هوشمند» برای هر خدمت (طراحی سایت، طراحی اپ، سئو سایت، سئو داخلی، سئو خارجی، سئو تکنیکال، بهینه‌سازی سرعت، ریدیزاین، نگه‌داری و پشتیبانی)؛ با بلاک‌های مشترکِ نوار دعوت‌به‌اقدام، کارت‌های پلن قیمت‌گذاری، نظرات مشتریان و سؤالات متداول.',
+  dec:'هویت بصری نارنجی و سرمه‌ای با تصویرسازی فضانورد و موشک در کل صفحات؛ ساختار و ریتم یکسانِ سکشن‌ها در صفحات خدمات تا کاربر همیشه جای خودش در مسیر را بداند؛ تأکید بر تبدیل بازدیدکننده به تماس (نوار دعوت‌به‌اقدام و شماره تماس).',
+  res:'مجموعهٔ کامل و یکپارچهٔ صفحات طراحی‌شدهٔ گروه رابین — از صفحهٔ اصلی تا جزئی‌ترین صفحهٔ خدمات — آمادهٔ توسعهٔ تک‌جا.',
+  img:'assets/projects/robin/robin-home.webp',
+  gallery:[
+   ['robin-home','صفحهٔ اصلی'],['robin-services','صفحهٔ خدمات'],['robin-portfolio','پورتفولیو'],
+   ['robin-design-dev','طراحی و توسعهٔ هوشمند'],['robin-site-design','طراحی سایت هوشمند'],['robin-app-design','طراحی اپ هوشمند'],
+   ['robin-redesign','ریدیزاین هوشمند'],['robin-seo','سئو سایت هوشمند'],['robin-seo-onpage','سئو داخلی هوشمند'],
+   ['robin-seo-offpage','سئو خارجی هوشمند'],['robin-seo-technical','سئو تکنیکال هوشمند'],['robin-speed','بهینه‌سازی سرعت هوشمند'],['robin-maintenance','نگه‌داری و پشتیبانی هوشمند']
+  ].map(([s,c])=>({src:'assets/projects/robin/'+s+'.webp',cap:c}))},
+ {t:'میتی',ty:'وب‌اپ',dev:'d',meta:'وب‌اپ · طراحی و اجرا',sum:'طراحی و اجرای محصول میتی (meetycoach.ir)؛ از ایده تا رابط نهایی و اجرای زنده روی دامنه.',link:'https://meetycoach.ir',linkLabel:'مشاهدهٔ محصول زنده'},
+ {t:'Fartak Project',ty:'',dev:'d',sum:'پروژهٔ طراحی Fartak؛ از ساختار صفحه‌ها و سلسله‌مراتب اطلاعات تا کامپوننت‌های نهایی رابط.'},
+ {t:'بالنو | پروژه سایت رنگ فروشی',ty:'وب‌سایت',dev:'d',sum:'طراحی سایت فروشگاه رنگ بالنو؛ معرفی محصولات رنگ و تجربهٔ کاربری مشتری در انتخاب و خرید آنلاین.'},
+ {t:'علار',ty:'',dev:'m',sum:'پروژهٔ طراحی علار؛ زبان بصری و چیدمان رابط متناسب با هویت محصول.'},
+ {t:'مبلمان اداری',ty:'',dev:'d',sum:'طراحی سایت مبلمان اداری؛ نمایش خوانا و دسته‌بندی‌شدهٔ محصولات برای انتخاب بهتر مشتری سازمانی.'},
+ {t:'بدون اسم',ty:'',dev:'m',sum:'پروژهٔ طراحی بدون‌نام؛ جزئیات مطالعه موردی به‌زودی تکمیل می‌شود.'},
+ {t:'بدون اسم',ty:'',dev:'d',sum:'پروژهٔ طراحی بدون‌نام؛ جزئیات مطالعه موردی به‌زودی تکمیل می‌شود.'},
+ {t:'بدون اسم',ty:'',dev:'m',sum:'پروژهٔ طراحی بدون‌نام؛ جزئیات مطالعه موردی به‌زودی تکمیل می‌شود.'},
+ {t:'بدون اسم',ty:'',dev:'d',sum:'پروژهٔ طراحی بدون‌نام؛ جزئیات مطالعه موردی به‌زودی تکمیل می‌شود.'},
+ {t:'New Project 1',ty:'',dev:'m',sum:'پروژهٔ جدید؛ جزئیات مطالعه موردی به‌زودی تکمیل می‌شود.'}
 ];
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const fa=n=>String(n).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
@@ -279,7 +296,7 @@ function mock(p){
   :'<div class="scr"><em class="hd" style="height:100%"></em><div style="display:grid;gap:8px;align-content:start"><em class="sm" style="width:35%"></em><em></em><em class="ch" style="height:90px"><u style="height:50%"></u><u style="height:80%"></u><u style="height:60%"></u><u style="height:95%"></u><u style="height:70%"></u><u style="height:85%"></u></em><em></em></div></div>';
  return m?`<div class="mk">${inner}</div>`:`<div class="mk d"><div class="bar"><i></i><i></i><i></i></div>${inner}</div>`;
 }
-$('#archm').innerHTML=mock(projects[0]);
+$('#archm').innerHTML=mock({...projects[0],dev:'m'});
 
 /* projects */
 const box=$('#pjs');
@@ -320,13 +337,13 @@ if(H){const cu=$('#cur');let x=0,y=0,tx=0,ty=0;
 let cur=0,last=null;const ov=$('#ov');
 function open(i){
  cur=(i+projects.length)%projects.length;const p=projects[cur];last=document.activeElement;
- const meta=[p.ty,p.y].filter(Boolean).join('، ');
+ const meta=p.meta||[p.ty,p.y].filter(Boolean).join('، ');
  const rows=[['نقش من',p.role],['مسئله',p.problem],['فرایند',p.process],['تصمیم‌های طراحی',p.dec],['نتیجه',p.res]].filter(([,v])=>v);
- const dl=rows.length?`<dl>${meta?`<dt>نوع پروژه و سال</dt><dd>${meta}</dd>`:''}${rows.map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>`:'';
+ const dl=rows.length?`<dl>${meta?`<dt>خلاصه</dt><dd>${meta}</dd>`:''}${rows.map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>`:'';
  const soon=rows.length?'':`<div class="soon"><b>این مطالعهٔ موردی در حال تدوین است.</b><p>جزئیات مسئله، فرایند و نتیجه به‌زودی منتشر می‌شود. برای شنیدنش: <a href="https://t.me/Mhdy_Hn12" target="_blank" rel="noopener">t.me/Mhdy_Hn12</a></p></div>`;
  const linkBtn=p.link?`<a class="btn" style="margin-top:20px" href="${p.link}" target="_blank" rel="noopener">${p.linkLabel||'مشاهدهٔ پروژه'}</a>`:'';
  $('#ovb').innerHTML=`<div><h2>${p.t}</h2><p style="color:var(--mut);margin:0">${p.sum}</p>${dl}${soon}${linkBtn}</div>
- <div class="stage in"><div class="tilt">${mock(p)}</div></div>`;
+ ${p.gallery?`<div class="gal" role="group" aria-label="تصاویر ${p.t}">${p.gallery.map(g=>`<figure><img loading="lazy" src="${g.src}" alt="${p.t} — ${g.cap}"><figcaption>${g.cap}</figcaption></figure>`).join('')}</div>`:`<div class="stage in"><div class="tilt">${mock(p)}</div></div>`}`;
  ov.classList.add('on');ov.scrollTop=0;document.body.style.overflow='hidden';$('#close').focus()}
 function close(){ov.classList.remove('on');document.body.style.overflow='';last&&last.focus()}
 $('#close').onclick=close;$('#prev').onclick=()=>open(cur-1);$('#next').onclick=()=>open(cur+1);
