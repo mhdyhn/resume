@@ -178,6 +178,9 @@ h1 span:nth-child(1){text-align:start}
 .ovb h2{margin:0 0 8px;font-weight:100;font-size:clamp(2.6rem,7vw,6.4rem);line-height:1.2}
 .ovb dt{margin-top:26px;color:var(--ch)}.ovb dd{margin:2px 0 0;color:var(--mut)}
 .ovb .stage{position:sticky;top:90px;align-self:start;clip-path:none}
+.soon{margin-top:26px;border:1px dashed var(--line);border-radius:18px;padding:22px;color:var(--mut);max-width:46ch}
+.soon b{color:var(--ch);font-weight:400}
+.soon a{color:var(--ch);border-bottom:1px solid var(--ch)}
 .ov{overscroll-behavior:contain}
 .ul,.btn,.cbtn,.ovt button,.chips span{touch-action:manipulation}
 img,svg,video{max-width:100%}
@@ -219,7 +222,7 @@ img,svg,video{max-width:100%}
   <div>
     <div class="sg"><h3>طراحی رابط</h3><div class="chips"><span>طراحی صفحه‌ها</span><span>سیستم طراحی</span><span>تایپوگرافی فارسی</span><span>طراحی ریسپانسیو</span><span>موکاپ و پروتوتایپ</span></div></div>
     <div class="sg"><h3>تجربه کاربری</h3><div class="chips"><span>تحقیق و مصاحبه</span><span>معماری اطلاعات</span><span>جریان کاربر</span><span>تست قابلیت استفاده</span></div></div>
-    <div class="sg"><h3>ابزارها</h3><div class="chips"><span class="lat">Figma</span><span>[ابزار دوم]</span><span>[ابزار سوم]</span></div></div>
+    <div class="sg"><h3>ابزارها</h3><div class="chips"><span class="lat">Figma</span></div></div>
   </div>
 </div></section>
 
@@ -245,14 +248,19 @@ img,svg,video{max-width:100%}
 const TG='Mhdy_Hn12';
 const LOGO='assets/logo-mark.png'; /* مسیر فایل لوگو، مثلاً assets/logo.svg */
 const projects=[
- {t:'[عنوان پروژه اول]',ty:'اپ موبایل',y:'۱۴۰۴',dev:'m',role:'[نقش تو]',sum:'[یک یا دو جمله درباره پروژه]',problem:'[مسئله‌ای که حل شد]',process:'[مراحل تحقیق و طراحی]',dec:'[مهم‌ترین تصمیم‌های طراحی]',res:'[نتیجه نهایی]',img:''},
- {t:'[عنوان پروژه دوم]',ty:'وب‌اپ',y:'۱۴۰۴',dev:'d'},
- {t:'[عنوان پروژه سوم]',ty:'وب‌سایت',y:'۱۴۰۳',dev:'d'},
- {t:'[عنوان پروژه چهارم]',ty:'اپ موبایل',y:'۱۴۰۳',dev:'m'},
- {t:'[عنوان پروژه پنجم]',ty:'وب‌اپ',y:'۱۴۰۲',dev:'d'},
- {t:'[عنوان پروژه ششم]',ty:'وب‌سایت',y:'۱۴۰۲',dev:'d'}
+ {t:'Robin Ghrop',ty:'',y:'',dev:'m',sum:'طراحی رابط و تجربهٔ کاربری برای Robin Ghrop.'},
+ {t:'میتی',ty:'وب‌اپ',y:'',dev:'d',sum:'طراحی و اجرای محصول میتی (meetycoach.ir)؛ از ایده تا رابط نهایی و اجرای زنده روی دامنه.',link:'https://meetycoach.ir',linkLabel:'مشاهدهٔ محصول زنده'},
+ {t:'Fartak Project',ty:'',y:'',dev:'d',sum:'پروژهٔ طراحی Fartak Project.'},
+ {t:'بالنو | پروژه سایت رنگ فروشی',ty:'وب‌سایت',y:'',dev:'d',sum:'طراحی سایت فروشگاه رنگ بالنو؛ از معماری صفحات تا کامپوننت‌های فروشگاهی.'},
+ {t:'علار',ty:'',y:'',dev:'m',sum:'پروژهٔ طراحی علار.'},
+ {t:'مبلمان اداری',ty:'',y:'',dev:'d',sum:'طراحی تجربهٔ مبلمان اداری؛ از معماری اطلاعات تا طراحی صفحه.'},
+ {t:'بدون اسم',ty:'',y:'',dev:'m',sum:'پروژهٔ بدون‌نام.'},
+ {t:'بدون اسم',ty:'',y:'',dev:'d',sum:'پروژهٔ بدون‌نام.'},
+ {t:'بدون اسم',ty:'',y:'',dev:'m',sum:'پروژهٔ بدون‌نام.'},
+ {t:'بدون اسم',ty:'',y:'',dev:'d',sum:'پروژهٔ بدون‌نام.'},
+ {t:'New Project 1',ty:'',y:'',dev:'m',sum:'پروژهٔ جدید.'}
 ];
-const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],ph=s=>s||'[متن در انتظار تکمیل]';
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const fa=n=>String(n).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
 const H=matchMedia('(hover:hover)').matches;
 const id=TG.replace(/^@/,''),tgl='https://t.me/'+id;$$('[data-tg]').forEach(a=>{a.href=tgl;a.target='_blank';a.rel='noopener'});$('#tgid').textContent='@'+id;
@@ -275,10 +283,11 @@ $('#archm').innerHTML=mock(projects[0]);
 
 /* projects */
 const box=$('#pjs');
-projects.forEach((p,i)=>{
+ projects.forEach((p,i)=>{
  const a=document.createElement('article');a.className='pj';
+ const meta=[p.ty,p.y].filter(Boolean).join('، ');
  a.innerHTML=`<div class="stage" data-cur="مشاهده" data-i="${i}"><div class="tilt" data-p=".04">${mock(p)}</div></div>
- <div class="info"><div class="m">${p.ty}، ${p.y}</div><h3>${p.t}</h3><p>${ph(p.sum)}</p><button class="ul" data-i="${i}">مطالعه موردی</button></div>`;
+ <div class="info">${meta?`<div class="m">${meta}</div>`:''}<h3>${p.t}</h3><p>${p.sum}</p><button class="ul" data-i="${i}">مطالعه موردی</button></div>`;
  box.appendChild(a);
  if(i===2)box.insertAdjacentHTML('beforeend','<a class="slim" href="'+tgl+'" target="_blank" rel="noopener" data-cur="تلگرام"><span>پروژه‌ای در ذهن داری؟</span><b>بیا حرف بزنیم</b></a>');
 });
@@ -311,9 +320,12 @@ if(H){const cu=$('#cur');let x=0,y=0,tx=0,ty=0;
 let cur=0,last=null;const ov=$('#ov');
 function open(i){
  cur=(i+projects.length)%projects.length;const p=projects[cur];last=document.activeElement;
- $('#ovb').innerHTML=`<div><h2>${p.t}</h2><p style="color:var(--mut);margin:0">${ph(p.sum)}</p><dl>
- <dt>نوع پروژه و سال</dt><dd>${p.ty}، ${p.y}</dd><dt>نقش من</dt><dd>${ph(p.role)}</dd><dt>مسئله</dt><dd>${ph(p.problem)}</dd>
- <dt>فرایند</dt><dd>${ph(p.process)}</dd><dt>تصمیم‌های طراحی</dt><dd>${ph(p.dec)}</dd><dt>نتیجه</dt><dd>${ph(p.res)}</dd></dl></div>
+ const meta=[p.ty,p.y].filter(Boolean).join('، ');
+ const rows=[['نقش من',p.role],['مسئله',p.problem],['فرایند',p.process],['تصمیم‌های طراحی',p.dec],['نتیجه',p.res]].filter(([,v])=>v);
+ const dl=rows.length?`<dl>${meta?`<dt>نوع پروژه و سال</dt><dd>${meta}</dd>`:''}${rows.map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>`:'';
+ const soon=rows.length?'':`<div class="soon"><b>این مطالعهٔ موردی در حال تدوین است.</b><p>جزئیات مسئله، فرایند و نتیجه به‌زودی منتشر می‌شود. برای شنیدنش: <a href="https://t.me/Mhdy_Hn12" target="_blank" rel="noopener">t.me/Mhdy_Hn12</a></p></div>`;
+ const linkBtn=p.link?`<a class="btn" style="margin-top:20px" href="${p.link}" target="_blank" rel="noopener">${p.linkLabel||'مشاهدهٔ پروژه'}</a>`:'';
+ $('#ovb').innerHTML=`<div><h2>${p.t}</h2><p style="color:var(--mut);margin:0">${p.sum}</p>${dl}${soon}${linkBtn}</div>
  <div class="stage in"><div class="tilt">${mock(p)}</div></div>`;
  ov.classList.add('on');ov.scrollTop=0;document.body.style.overflow='hidden';$('#close').focus()}
 function close(){ov.classList.remove('on');document.body.style.overflow='';last&&last.focus()}
