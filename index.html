@@ -226,8 +226,7 @@ img,svg,video{max-width:100%}
 .hbody,.skx{grid-template-columns:minmax(0,1fr)}
 .skl{position:static}
 .hire .wrap{grid-template-columns:1fr}
-.nav ul{gap:14px;font-size:.85rem}
-.nav ul li:nth-child(n+3){display:none}
+.nav ul{gap:clamp(8px,2.5vw,14px);font-size:.85rem;flex-wrap:wrap;justify-content:flex-end}
 .nav a{padding:12px 2px}
 .silk{filter:blur(42px);opacity:.38;animation:none}
 .ovt{flex-wrap:wrap;gap:10px;padding:12px 16px}
@@ -248,6 +247,19 @@ img,svg,video{max-width:100%}
 .pbody p{max-width:none}
 .pnum{font-size:1.9rem}
 .avail{font-size:.85rem;padding:9px 16px}
+}
+/* Desktop: keep the larger type and grid columns proportional to the viewport. */
+@media (min-width:821px){
+.hero{justify-content:flex-start;gap:clamp(48px,8vh,96px);padding-bottom:clamp(48px,6vh,80px)}
+.hero h1{font-size:clamp(4.5rem,7.5vw,7.5rem)}
+.hero .tags{font-size:clamp(1.05rem,1.35vw,1.3rem);margin:24px 0 28px;max-width:42ch}
+.pj{grid-template-columns:auto minmax(0,1fr) minmax(0,1.1fr)}
+.pj:nth-child(even){grid-template-columns:minmax(0,1.1fr) minmax(0,1fr) auto}
+.skx{grid-template-columns:minmax(0,1fr) minmax(0,1.6fr)}
+.hire .wrap{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}
+.ovb{grid-template-columns:repeat(2,minmax(0,1fr))}
+.pbody,.skx>*,.hire .wrap>*,.ovb>*{min-width:0}
+.sh h2,.skl h2{font-size:clamp(3rem,6vw,6rem)}
 }
 /* Phone layout, including the 390px target width. */
 @media (max-width:560px){
